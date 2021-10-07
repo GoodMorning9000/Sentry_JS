@@ -1,7 +1,7 @@
 /** Utility class is used for general things in discord.js and discrd.js commando.*/
 class Utility {
 	/** Client object for the Utility class. */
-	static client = require('../index.js')[0];
+	static client = require('../index.js').client;
 	static discord = require('discord.js');
 
 	/** Removes all reactions from specific user on a specific message.
