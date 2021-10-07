@@ -20,17 +20,16 @@ module.exports = class BalCommand extends Command {
 	}
 	async run(message) {
 		const user_data = mClient.db('Sentry_Data').collection('user_data');
-		let result = await user_data.findOne({ id: message.author.id });
+		const result = await user_data.findOne({ id: message.author.id });
 
 		if (!result) {
 			user_data.insertOne({ id: `${message.author.id}`, balance: 0 });
-			result = await user_data.findOne({ id: message.author.id });
 		}
 
 		message.inlineReply({
 			embed: new MessageEmbed({
 				title: `${message.author.username}'s Balance`,
-				description: '```' + `${message.author.username} has ${result.balance} coins.` + '```',
+				description: '```' + `${message.author.username} has ${result ? result.balance : '0'} coins.` + '```',
 				color: 'DARK_GREY',
 			}),
 			allowedMentions: { repliedUser: false },
