@@ -1,12 +1,8 @@
 const { MessageEmbed } = require('discord.js');
 const { Command } = require('discord.js-commando');
-const { MongoClient } = require('mongodb');
-const { uri } = require('../../config.js');
+const { data } = require('../../index.js');
 
 require('../ExtendedMessage.js');
-
-const mClient = new MongoClient(uri);
-mClient.connect();
 
 module.exports = class WorkCommand extends Command {
 	constructor(client) {
@@ -20,7 +16,7 @@ module.exports = class WorkCommand extends Command {
 	run(message) {
 		async function main() {
 			try {
-				const user_data = mClient.db('Sentry_Data').collection('user_data');
+				const user_data = data.db('Sentry_Data').collection('user_data');
 				const result = await user_data.findOne({ id: message.author.id });
 				const e = new MessageEmbed();
 
