@@ -20,10 +20,11 @@ module.exports = class BalCommand extends Command {
 	}
 	async run(message) {
 		const user_data = mClient.db('Sentry_Data').collection('user_data');
-		const result = await user_data.findOne({ id: message.author.id });
+		let result = await user_data.findOne({ id: message.author.id });
 
 		if (!result) {
 			user_data.insertOne({ id: `${message.author.id}`, balance: 0 });
+			result = await user_data.findOne({ id: message.author.id });
 		}
 
 		message.inlineReply({
