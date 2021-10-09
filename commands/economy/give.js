@@ -45,7 +45,7 @@ module.exports = class GiveCommand extends Command {
 				.setDescription('```' + `${message.author.username} has given ${user.username} ${amount} coins.\nThey now have ${rb.balance + amount} coins.` + '```')
 				.setColor('DARK_GREY');
 		}
-		switch (!rb ? 0 : !gb ? 1 : amount > gb.balance ? 2 : amount <= 0 ? 3 : message.user.id == user.id ? 4 : null) {
+		switch (!rb ? 0 : !gb ? 1 : amount > gb.balance ? 2 : amount <= 0 ? 3 : message.author.id == user.id ? 4 : null) {
 		case 0:
 			e.setTitle('<:x_:849378365730586634>  -  Error')
 				.setDescription('```This person does not have an account.\nTell this person to use the >bal command.```')
