@@ -3,10 +3,7 @@ const config = require('./config.js');
 const path = require('path');
 const { MongoClient } = require('mongodb');
 
-const client = new CommandoClient({
-	commandPrefix: config.prefix,
-	owner: '744242349189627975',
-});
+const client = new CommandoClient({ commandPrefix: config.prefix});
 
 const data = new MongoClient(config.uri);
 data.connect();
@@ -22,8 +19,11 @@ client.registry
 	.registerDefaultGroups()
 	.registerDefaultCommands({
 		help: false,
+		prefix: false,
 		ping: false,
+		_eval: false,
 		unknownCommand: false,
+		commandState: false,
 	})
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 
