@@ -3,7 +3,7 @@ const config = require('./config.js');
 const path = require('path');
 const { MongoClient } = require('mongodb');
 
-const client = new CommandoClient({ commandPrefix: config.prefix});
+const client = new CommandoClient({ commandPrefix: config.prefix });
 
 const data = new MongoClient(config.uri);
 data.connect();
