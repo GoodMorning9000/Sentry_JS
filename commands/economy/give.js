@@ -45,30 +45,32 @@ module.exports = class GiveCommand extends Command {
 				.setDescription('```' + `${message.author.username} has given ${user.username} ${amount} coins.\nThey now have ${rb.balance + amount} coins.` + '```')
 				.setColor('DARK_GREY');
 		}
-		else if (!rb) {
+		switch (!rb ? 0 : !gb ? 1 : amount > gb.balance ? 2 : amount <= 0 ? 3 : message.user.id == user.id ? 4 : null) {
+		case 0:
 			e.setTitle('<:x_:849378365730586634>  -  Error')
 				.setDescription('```This person does not have an account.\nTell this person to use the >bal command.```')
 				.setColor('RED');
-		}
-		else if (!gb) {
+			break;
+		case 1:
 			e.setTitle('<:x_:849378365730586634>  -  Error')
 				.setDescription('```You do not have an account.\n Use >bal to make one.```')
 				.setColor('RED');
-		}
-		else if (amount > gb.balance) {
+			break;
+		case 2:
 			e.setTitle('<:x_:849378365730586634>  -  Error')
 				.setDescription('```You can not give more than you have.```')
 				.setColor('RED');
-		}
-		else if (amount <= 0) {
+			break;
+		case 3:
 			e.setTitle('<:x_:849378365730586634>  -  Error')
 				.setDescription('```You have to choose a number greater than 0.```')
 				.setColor('RED');
-		}
-		else if (message.author.id == user.id) {
+			break;
+		case 4:
 			e.setTitle('<:x_:849378365730586634>  -  Error')
 				.setDescription('```You can not give coins to yourself. ```')
 				.setColor('RED');
+			break;
 		}
 
 		message.inlineReply({
